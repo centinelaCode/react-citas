@@ -10,10 +10,16 @@ const Formulario = () => {
   const [sintomas, setSintomas] = useState(''); 
 
 
-  // Funcitios
+  // Funcitions
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Enviando Formulario')
+
+    // Validación del formulario
+    if([nombre, propietario, email, fechaAlta, sintomas].includes('')) {
+      console.log('Hay al menos un campo vacio')
+    } else {
+      console.log('Todos llenos')
+    }
   }
 
 
@@ -105,7 +111,7 @@ const Formulario = () => {
             Sintomas
           </label>
           <textarea 
-            rows="6"
+            rows="4"
             id="sintomas"
             placeholder="Escribe los Sintomas"
             className="border-2 w-full p-2 mt-2 placeholder-gary-400 rounded-md"
