@@ -78,12 +78,15 @@ const Formulario = () => {
             Email
           </label>
           <textarea 
+            rows="6"
             id="sintomas"
             placeholder="Escribe los Sintomas"
             className="border-2 w-full p-2 mt-2 placeholder-gary-400 rounded-md"
           />
 
         </div>
+
+       
 
         <input 
           type="submit"
