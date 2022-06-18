@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react'
 
-const Formulario = () => {
+const Formulario = ({ pacientes, setPacientes }) => {
 
   // States
-  const [nombre, setNombre] = useState(''); 
-  const [propietario, setPropietario] = useState(''); 
-  const [email, setEmail] = useState(''); 
+  const [nombre, setNombre] = useState('');
+  const [propietario, setPropietario] = useState('');
+  const [email, setEmail] = useState('');
   const [fechaAlta, setFechaAlta] = useState('');
-  const [sintomas, setSintomas] = useState(''); 
+  const [sintomas, setSintomas] = useState('');
 
-  const [error, setError] = useState(false); 
+  const [error, setError] = useState(false);
 
 
   // Funcitions
@@ -17,19 +17,37 @@ const Formulario = () => {
     e.preventDefault();
 
     // Validación del formulario
-    if([nombre, propietario, email, fechaAlta, sintomas].includes('')) {      
+    if([nombre, propietario, email, fechaAlta, sintomas].includes('')) {
       // Hay al menos un campo vacio
       setError(true);
       return;
     } 
     // Ya estan todos los campos llenos
     setError(false);
+
+    // creamos el objeto con la información del paciente
+    const objPaciente = {
+      nombre,
+      propietario,
+      email,
+      fechaAlta,
+      sintomas
+    }
+
+    setPacientes([...pacientes, objPaciente]);
+
+    // reiniciar el formulario
+    setNombre('');
+    setPropietario('');
+    setEmail('');
+    setFechaAlta('');
+    setSintomas('');
   }
 
 
   return (
     <div className="md:w-1/2 lg:w-2/5 mx-5">
-      <h2 className="font-black text-3xl text-center">Seguimiento Pacientes</h2> 
+      <h2 className="font-black text-3xl text-center">Seguimiento Pacientes</h2>
 
       <p className="text-lg mt-5 text-center mb-5">
         Añade Pacientes y {''}
@@ -52,7 +70,7 @@ const Formulario = () => {
             htmlFor="mascota"
             className="block text-gray-700 uppercase font-bold"
           >
-            Nombre Mascota 
+            Nombre Mascota
           </label>
           <input 
             id="mascota"
