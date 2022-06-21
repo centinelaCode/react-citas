@@ -1,5 +1,6 @@
-
 const Paciente = ({paciente, setPaciente}) => {
+
+  
 
   const {nombre, propietario, email, fechaAlta, sintomas} = paciente;
 
