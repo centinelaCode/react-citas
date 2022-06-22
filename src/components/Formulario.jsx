@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Error from './Error'
 
-const Formulario = ({ pacientes, setPacientes, paciente }) => {
+const Formulario = ({ pacientes, setPacientes, paciente, setPaciente}) => {
 
   // States
   const [nombre, setNombre] = useState('');
@@ -13,7 +13,14 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    console.log(paciente)
+
+    if(Object.keys(paciente).length > 0) {      
+      setNombre(paciente.nombre);
+      setPropietario(paciente.propietario);
+      setEmail(paciente.email);
+      setFechaAlta(paciente.fechaAlta);
+      setSintomas(paciente.sintomas);
+    } 
   }, [paciente]);
 
 
@@ -48,18 +55,38 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
       propietario,
       email,
       fechaAlta,
-      sintomas,
-      id: generarId()
+      sintomas,      
     }
 
-    setPacientes([...pacientes, objPaciente]);
+    if (paciente.id) {
+      // Cuando estamos actualizando o editando el registro
 
-    // reiniciar el formulario
-    setNombre('');
-    setPropietario('');
-    setEmail('');
-    setFechaAlta('');
-    setSintomas('');
+      // al objeto con los campos del formulario le asiganmos el id del paciente que vamos e editar
+      objPaciente.id = paciente.id
+      // console.log(objPaciente)
+      // console.log(paciente)
+
+      // recorremos pacientes con .map y cuando encontremos al objeto con el id lo modifiamos por el obj actualizado o editado
+      const pacientesActualizados = pacientes.map( pacienteState => pacienteState.id === paciente.id ? objPaciente : pacienteState)
+
+      // Ya solo actualizamos los pacientes con el nuevo arreglo con el obje actualizado
+      setPacientes(pacientesActualizados);
+
+      // limpiamos el state de paciente
+      setPaciente({})          
+    } 
+    else {
+      // Agregamos uno nuevo registro
+      objPaciente.id = generarId();
+      setPacientes([...pacientes, objPaciente]);     
+    }
+
+     // reiniciar el formulario
+     setNombre('');
+     setPropietario('');
+     setEmail('');
+     setFechaAlta('');
+     setSintomas('');
   }
 
 
@@ -169,7 +196,7 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
         <input 
           type="submit"
           className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors"
-          value="Agregar Paciente"
+          value={ paciente.id ? 'Editar Paciente' : 'Agregar Paciente' }
         />
       </form>
 

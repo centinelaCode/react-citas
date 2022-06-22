@@ -10,6 +10,8 @@ const App = () => {
   const [paciente, setPaciente] = useState({});
 
 
+
+
   return (
     <div className="container mx-auto mt-10">
       <Header />
@@ -19,6 +21,7 @@ const App = () => {
           pacientes={pacientes}
           paciente={paciente}
           setPacientes={setPacientes}
+          setPaciente={setPaciente}
         />
         <ListadoPacientes 
           pacientes={pacientes}

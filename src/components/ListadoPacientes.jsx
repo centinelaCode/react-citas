@@ -1,15 +1,9 @@
-import { useEffect } from 'react'
 import Paciente from './Paciente';
 
 const ListadoPacientes = ({pacientes, setPaciente}) => {
   
   // console.log(pacientes.length === 0);
   // console.log(pacientes && pacientes.length);
-
-  useEffect(() => {
-    console.log('Nuevo Paciente');
-  }, [pacientes])
-
 
   return (
     <div className="md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll">
@@ -43,8 +37,7 @@ const ListadoPacientes = ({pacientes, setPaciente}) => {
         </>
 
       )}
-
-      
+            
     </div> 
   )
 }
