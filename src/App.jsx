@@ -9,7 +9,13 @@ const App = () => {
   const [pacientes, setPacientes] = useState([]);
   const [paciente, setPaciente] = useState({});
 
+  // funcion para eliminar un paciente
+  const eliminarPaciente = (id) => {
+    const pacientesActualizados = pacientes.filter( pac => pac.id !== id);    
+    setPacientes(pacientesActualizados);
 
+
+  }
 
 
   return (
@@ -26,6 +32,7 @@ const App = () => {
         <ListadoPacientes 
           pacientes={pacientes}
           setPaciente={setPaciente}
+          eliminarPaciente={eliminarPaciente}
         />
       </div>
     </div>
